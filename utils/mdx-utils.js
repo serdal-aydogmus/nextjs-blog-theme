@@ -12,7 +12,9 @@ export const POSTS_PATH = path.join(process.cwd(), 'posts');
 export const postFilePaths = fs
   .readdirSync(POSTS_PATH)
   // Only include md(x) files
-  .filter((path) => /\.mdx?$/.test(path));
+  .filter((path) => /\.mdx?$/.test(path))
+  // Only take the first file
+  .slice(0, 1);
 
 export const sortPostsByDate = (posts) => {
   return posts.sort((a, b) => {
@@ -46,7 +48,6 @@ export const getPostBySlug = async (slug) => {
   const { content, data } = matter(source);
 
   const mdxSource = await serialize(content, {
-    // Optionally pass remark/rehype plugins
     mdxOptions: {
       remarkPlugins: [remarkGfm],
       rehypePlugins: [rehypePrism],
@@ -54,41 +55,18 @@ export const getPostBySlug = async (slug) => {
     scope: data,
   });
 
-  return { mdxSource, data, postFilePath };
+  return {
+    mdxSource,
+    data,
+    nextPost: null,
+    previousPost: null,
+  };
 };
 
 export const getNextPostBySlug = (slug) => {
-  const posts = getPosts();
-  const currentFileName = `${slug}.mdx`;
-  const currentPost = posts.find((post) => post.filePath === currentFileName);
-  const currentPostIndex = posts.indexOf(currentPost);
-
-  const post = posts[currentPostIndex - 1];
-  // no prev post found
-  if (!post) return null;
-
-  const nextPostSlug = post?.filePath.replace(/\.mdx?$/, '');
-
-  return {
-    title: post.data.title,
-    slug: nextPostSlug,
-  };
+  return null;
 };
 
 export const getPreviousPostBySlug = (slug) => {
-  const posts = getPosts();
-  const currentFileName = `${slug}.mdx`;
-  const currentPost = posts.find((post) => post.filePath === currentFileName);
-  const currentPostIndex = posts.indexOf(currentPost);
-
-  const post = posts[currentPostIndex + 1];
-  // no prev post found
-  if (!post) return null;
-
-  const previousPostSlug = post?.filePath.replace(/\.mdx?$/, '');
-
-  return {
-    title: post.data.title,
-    slug: previousPostSlug,
-  };
+  return null;
 };
