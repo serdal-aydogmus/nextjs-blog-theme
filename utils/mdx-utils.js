@@ -12,9 +12,7 @@ export const POSTS_PATH = path.join(process.cwd(), 'posts');
 export const postFilePaths = fs
   .readdirSync(POSTS_PATH)
   // Only include md(x) files
-  .filter((path) => /\.mdx?$/.test(path))
-  // Only take the first file
-  .slice(0, 1);
+  .filter((path) => /\.mdx?$/.test(path));
 
 export const sortPostsByDate = (posts) => {
   return posts.sort((a, b) => {
