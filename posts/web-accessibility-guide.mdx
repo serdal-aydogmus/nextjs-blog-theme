@@ -1,0 +1,121 @@
+---
+title: Web Accessibility: Building Inclusive Digital Experiences
+description: "Learn how to create accessible websites that work for everyone, including users with disabilities. A practical guide to WCAG guidelines and implementation."
+date: Aug 15 2023
+---
+
+Web accessibility ensures that websites and applications can be used by everyone, including people with disabilities. Here's how to build more inclusive digital experiences.
+
+## Why Accessibility Matters
+
+- **1 billion people** worldwide live with some form of disability
+- **Legal requirements** in many countries (ADA, WCAG)
+- **Better SEO** and user experience for everyone
+- **Larger potential audience** for your website
+
+## The Four Principles of WCAG
+
+### 1. Perceivable
+Information must be presentable in ways users can perceive:
+
+```html
+<!-- Good: Alt text for images -->
+<img src="chart.png" alt="Sales increased 25% from Q1 to Q2" />
+
+<!-- Good: Captions for videos -->
+<video controls>
+  <source src="video.mp4" type="video/mp4">
+  <track kind="captions" src="captions.vtt" srclang="en" label="English">
+</video>
+```
+
+### 2. Operable
+Interface components must be operable:
+
+```css
+/* Good: Focus indicators */
+button:focus {
+  outline: 2px solid #007cba;
+  outline-offset: 2px;
+}
+
+/* Good: Sufficient color contrast */
+.text {
+  color: #333333; /* 4.5:1 contrast ratio on white */
+}
+```
+
+### 3. Understandable
+Information and UI operation must be understandable:
+
+```html
+<!-- Good: Clear form labels -->
+<label for="email">Email Address (required)</label>
+<input type="email" id="email" required aria-describedby="email-error">
+<div id="email-error" role="alert">Please enter a valid email address</div>
+```
+
+### 4. Robust
+Content must be robust enough for various assistive technologies:
+
+```html
+<!-- Good: Semantic HTML -->
+<nav aria-label="Main navigation">
+  <ul>
+    <li><a href="/" aria-current="page">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+</nav>
+```
+
+## Essential Accessibility Practices
+
+### Keyboard Navigation
+Ensure all interactive elements are keyboard accessible:
+
+```javascript
+// Handle keyboard events
+button.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    button.click();
+  }
+});
+```
+
+### Screen Reader Support
+Use ARIA attributes appropriately:
+
+```html
+<button aria-expanded="false" aria-controls="menu">
+  Menu
+</button>
+<ul id="menu" hidden>
+  <li><a href="/home">Home</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+```
+
+### Color and Contrast
+- Don't rely on color alone to convey information
+- Maintain minimum contrast ratios (4.5:1 for normal text)
+- Test with color blindness simulators
+
+## Testing Your Accessibility
+
+1. **Keyboard testing**: Navigate using only the Tab key
+2. **Screen reader testing**: Use NVDA, JAWS, or VoiceOver
+3. **Automated tools**: axe-core, Lighthouse, WAVE
+4. **Manual testing**: Check color contrast, focus indicators
+
+## Quick Wins for Better Accessibility
+
+- Add alt text to all images
+- Use semantic HTML elements
+- Ensure proper heading hierarchy (h1, h2, h3...)
+- Provide focus indicators
+- Test keyboard navigation
+- Use sufficient color contrast
+
+Building accessible websites isn't just about compliance—it's about creating better experiences for everyone.
