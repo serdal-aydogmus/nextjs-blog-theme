@@ -51,7 +51,7 @@ export default function Layout({ children }) {
 
   return (
     <div className="relative pb-24 overflow-hidden">
-      <div className="flex flex-col items-center max-w-2xl w-full mx-auto">
+      <div className="flex flex-col items-center max-w-2xl w-full mx-auto px-4 sm:px-6 lg:px-8">
         {children}
       </div>
     </div>

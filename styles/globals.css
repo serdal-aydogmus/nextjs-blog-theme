@@ -15,3 +15,105 @@ h6 {
 body {
   font-family: var(--font-secondary);
 }
+
+/* Responsive image styles */
+img, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  img, svg {
+    margin: 0.5rem auto;
+    max-width: calc(100vw - 3rem);
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Use mobile-optimized SVGs */
+  img[src*="css-layout-comparison.svg"] {
+    content: url('/images/css-layout-comparison-compact.svg');
+  }
+  
+  img[src*="flexbox-example.svg"] {
+    content: url('/images/flexbox-example-compact.svg');
+  }
+  
+  /* Aggressively scale down SVG for mobile */
+  svg {
+    font-size: 0.6em !important;
+    transform: scale(0.85);
+    transform-origin: center;
+  }
+  
+  svg text {
+    font-size: 6px !important;
+  }
+  
+  svg text[font-size="18"], svg text[font-size="20"] {
+    font-size: 8px !important;
+  }
+  
+  svg text[font-size="24"] {
+    font-size: 10px !important;
+  }
+  
+  svg text[font-size="16"] {
+    font-size: 7px !important;
+  }
+  
+  svg text[font-size="14"] {
+    font-size: 6px !important;
+  }
+  
+  svg text[font-size="12"] {
+    font-size: 5px !important;
+  }
+  
+  svg text[font-size="10"] {
+    font-size: 4px !important;
+  }
+  
+  svg text[font-size="9"] {
+    font-size: 4px !important;
+  }
+}
+
+/* Fix mobile text overflow issues */
+@media (max-width: 768px) {
+  /* Ensure proper word wrapping */
+  * {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Fix code block overflow */
+  pre {
+    overflow-x: auto;
+    max-width: calc(100vw - 3rem);
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  
+  code {
+    word-break: break-all;
+    white-space: pre-wrap;
+  }
+  
+  /* Fix long URLs and text */
+  p, li, h1, h2, h3, h4, h5, h6 {
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  /* Ensure tables are responsive */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: calc(100vw - 3rem);
+  }
+}

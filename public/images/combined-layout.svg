@@ -1,0 +1,111 @@
+<svg width="100%" height="auto" viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg" style="max-width: 700px;">
+  <!-- Background -->
+  <rect width="700" height="500" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="350" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1e293b">Grid + Flexbox Birlikte Kullanımı</text>
+  
+  <!-- Main Grid Container -->
+  <rect x="50" y="50" width="600" height="400" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" rx="8"/>
+  
+  <!-- Grid Lines -->
+  <g stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2,2">
+    <!-- Vertical lines -->
+    <line x1="200" y1="50" x2="200" y2="450"/>
+    <line x1="500" y1="50" x2="500" y2="450"/>
+    
+    <!-- Horizontal lines -->
+    <line x1="50" y1="130" x2="650" y2="130"/>
+    <line x1="50" y1="370" x2="650" y2="370"/>
+  </g>
+  
+  <!-- Header with Flexbox Navigation -->
+  <rect x="60" y="60" width="580" height="60" fill="#3b82f6" rx="6"/>
+  <text x="350" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Header (Grid Area) + Flexbox Navigation</text>
+  
+  <!-- Nav items using flexbox -->
+  <rect x="80" y="90" width="50" height="20" fill="#1e40af" rx="3"/>
+  <text x="105" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white">Home</text>
+  
+  <rect x="140" y="90" width="50" height="20" fill="#1e40af" rx="3"/>
+  <text x="165" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white">About</text>
+  
+  <rect x="200" y="90" width="50" height="20" fill="#1e40af" rx="3"/>
+  <text x="225" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white">Blog</text>
+  
+  <!-- Login button (right aligned) -->
+  <rect x="570" y="90" width="50" height="20" fill="#1e40af" rx="3"/>
+  <text x="595" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white">Login</text>
+  
+  <!-- Sidebar -->
+  <rect x="60" y="140" width="130" height="220" fill="#10b981" rx="6"/>
+  <text x="125" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Sidebar</text>
+  <text x="125" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">(Grid Area)</text>
+  
+  <!-- Sidebar menu items with flexbox -->
+  <rect x="75" y="190" width="100" height="25" fill="#059669" rx="4"/>
+  <text x="125" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Menu Item 1</text>
+  
+  <rect x="75" y="225" width="100" height="25" fill="#059669" rx="4"/>
+  <text x="125" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Menu Item 2</text>
+  
+  <rect x="75" y="260" width="100" height="25" fill="#059669" rx="4"/>
+  <text x="125" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Menu Item 3</text>
+  
+  <!-- Main Content Area -->
+  <rect x="210" y="140" width="280" height="220" fill="#f59e0b" rx="6"/>
+  <text x="350" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Main Content (Grid Area)</text>
+  
+  <!-- Article cards using flexbox -->
+  <rect x="225" y="180" width="120" height="80" fill="#d97706" rx="4"/>
+  <text x="285" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Article Card 1</text>
+  <text x="285" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white">(Flexbox)</text>
+  
+  <rect x="355" y="180" width="120" height="80" fill="#d97706" rx="4"/>
+  <text x="415" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Article Card 2</text>
+  <text x="415" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white">(Flexbox)</text>
+  
+  <rect x="225" y="270" width="250" height="80" fill="#d97706" rx="4"/>
+  <text x="350" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Featured Article</text>
+  <text x="350" y="310" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white">(Flexbox Item)</text>
+  
+  <!-- Aside -->
+  <rect x="510" y="140" width="130" height="220" fill="#8b5cf6" rx="6"/>
+  <text x="575" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Aside</text>
+  <text x="575" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">(Grid Area)</text>
+  
+  <!-- Widget with flexbox -->
+  <rect x="525" y="190" width="100" height="60" fill="#7c3aed" rx="4"/>
+  <text x="575" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Widget</text>
+  <text x="575" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white">(Flexbox)</text>
+  
+  <rect x="525" y="260" width="100" height="60" fill="#7c3aed" rx="4"/>
+  <text x="575" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Ad Space</text>
+  <text x="575" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white">(Flexbox)</text>
+  
+  <!-- Footer -->
+  <rect x="60" y="380" width="580" height="60" fill="#ef4444" rx="6"/>
+  <text x="350" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Footer (Grid Area)</text>
+  
+  <!-- Footer links with flexbox -->
+  <rect x="150" y="415" width="60" height="15" fill="#dc2626" rx="2"/>
+  <text x="180" y="424" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="white">Privacy</text>
+  
+  <rect x="220" y="415" width="60" height="15" fill="#dc2626" rx="2"/>
+  <text x="250" y="424" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="white">Terms</text>
+  
+  <rect x="290" y="415" width="60" height="15" fill="#dc2626" rx="2"/>
+  <text x="320" y="424" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="white">Contact</text>
+  
+  <!-- Social icons (right aligned) -->
+  <circle cx="520" cy="422" r="8" fill="#dc2626"/>
+  <text x="520" y="426" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white">f</text>
+  
+  <circle cx="540" cy="422" r="8" fill="#dc2626"/>
+  <text x="540" y="426" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white">t</text>
+  
+  <!-- Code examples -->
+  <rect x="50" y="465" width="600" height="25" fill="#1e293b" rx="4"/>
+  <text x="60" y="478" font-family="Monaco, monospace" font-size="9" fill="#10b981">Grid: display: grid; grid-template-areas: "header header header";</text>
+  <text x="60" y="488" font-family="Monaco, monospace" font-size="9" fill="#3b82f6">Flexbox: display: flex; justify-content: space-between;</text>
+</svg>

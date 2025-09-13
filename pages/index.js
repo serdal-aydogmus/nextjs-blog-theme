@@ -65,15 +65,15 @@ export default function Index({ posts, globalData }) {
                 as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
                 href={`/posts/[slug]`}
               >
-                <a className="py-6 lg:py-10 px-6 lg:px-16 pr-20 md:pr-24 block focus:outline-none focus:ring-4">
+                <a className="py-6 lg:py-10 px-4 sm:px-6 lg:px-16 pr-16 sm:pr-20 md:pr-24 block focus:outline-none focus:ring-4">
                   {post.data.date && (
-                    <p className="uppercase mb-3 font-bold opacity-60">
+                    <p className="uppercase mb-3 font-bold opacity-60 text-sm sm:text-base">
                       {post.data.date}
                     </p>
                   )}
-                  <h2 className="text-2xl md:text-3xl pr-4">{post.data.title}</h2>
+                  <h2 className="text-xl sm:text-2xl md:text-3xl pr-2 sm:pr-4 leading-tight">{post.data.title}</h2>
                   {post.data.description && (
-                    <p className="mt-3 text-lg opacity-60">
+                    <p className="mt-3 text-base sm:text-lg opacity-60 pr-2 sm:pr-4">
                       {post.data.description}
                     </p>
                   )}

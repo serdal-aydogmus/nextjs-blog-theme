@@ -1,0 +1,80 @@
+<svg width="100%" height="auto" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 800px;">
+  <!-- Background -->
+  <rect width="800" height="400" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1e293b">CSS Grid vs Flexbox</text>
+  
+  <!-- Flexbox Section -->
+  <g>
+    <text x="200" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#3b82f6">Flexbox (1D)</text>
+    
+    <!-- Flexbox container -->
+    <rect x="50" y="80" width="300" height="120" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="8"/>
+    <text x="200" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#1e40af">display: flex</text>
+    
+    <!-- Flexbox items -->
+    <rect x="70" y="110" width="60" height="40" fill="#3b82f6" rx="4"/>
+    <rect x="140" y="110" width="60" height="40" fill="#3b82f6" rx="4"/>
+    <rect x="210" y="110" width="60" height="40" fill="#3b82f6" rx="4"/>
+    <rect x="280" y="110" width="60" height="40" fill="#3b82f6" rx="4"/>
+    
+    <!-- Arrow showing direction -->
+    <path d="M 70 170 L 340 170" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="205" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#1e40af">Tek yön (row/column)</text>
+  </g>
+  
+  <!-- CSS Grid Section -->
+  <g>
+    <text x="600" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#10b981">CSS Grid (2D)</text>
+    
+    <!-- Grid container -->
+    <rect x="450" y="80" width="300" height="120" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="8"/>
+    <text x="600" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#047857">display: grid</text>
+    
+    <!-- Grid items -->
+    <rect x="470" y="110" width="60" height="35" fill="#10b981" rx="4"/>
+    <rect x="540" y="110" width="60" height="35" fill="#10b981" rx="4"/>
+    <rect x="610" y="110" width="60" height="35" fill="#10b981" rx="4"/>
+    <rect x="680" y="110" width="60" height="35" fill="#10b981" rx="4"/>
+    
+    <rect x="470" y="155" width="60" height="35" fill="#10b981" rx="4"/>
+    <rect x="540" y="155" width="60" height="35" fill="#10b981" rx="4"/>
+    <rect x="610" y="155" width="60" height="35" fill="#10b981" rx="4"/>
+    <rect x="680" y="155" width="60" height="35" fill="#10b981" rx="4"/>
+    
+    <!-- Arrows showing 2D -->
+    <path d="M 470 210 L 750 210" stroke="#10b981" stroke-width="2" marker-end="url(#arrowhead2)"/>
+    <path d="M 460 110 L 460 200" stroke="#10b981" stroke-width="2" marker-end="url(#arrowhead2)"/>
+    <text x="600" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#047857">İki boyutlu (rows + columns)</text>
+  </g>
+  
+  <!-- Use Cases -->
+  <g>
+    <text x="200" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#3b82f6">Ne Zaman Kullanılır?</text>
+    <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#1e40af">• Navigation bars</text>
+    <text x="200" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#1e40af">• Button groups</text>
+    <text x="200" y="310" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#1e40af">• Centering content</text>
+    <text x="200" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#1e40af">• Component layouts</text>
+    
+    <text x="600" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#10b981">Ne Zaman Kullanılır?</text>
+    <text x="600" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#047857">• Page layouts</text>
+    <text x="600" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#047857">• Card grids</text>
+    <text x="600" y="310" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#047857">• Complex designs</text>
+    <text x="600" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#047857">• Magazine layouts</text>
+  </g>
+  
+  <!-- Best Practice -->
+  <rect x="250" y="350" width="300" height="40" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" rx="8"/>
+  <text x="400" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#92400e">💡 İkisini birlikte kullanabilirsiniz!</text>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+    </marker>
+  </defs>
+</svg>
