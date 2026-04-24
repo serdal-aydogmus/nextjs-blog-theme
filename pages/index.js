@@ -88,7 +88,7 @@ export default function Index({ posts, globalData }) {
         {filteredPosts.length === 0 && selectedCategory && (
           <div className="text-center py-12">
             <p className="text-lg opacity-60">
-              "{selectedCategory}" kategorisinde henüz gönderi bulunmuyor.
+              &quot;{selectedCategory}&quot; kategorisinde henüz gönderi bulunmuyor.
             </p>
           </div>
         )}
