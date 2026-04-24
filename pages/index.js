@@ -55,7 +55,7 @@ export default function Index({ posts, globalData }) {
                 as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
                 href={`/posts/[slug]`}
               >
-                <a className="flex items-center gap-4 py-5 px-4 sm:px-6 lg:px-10 focus:outline-none focus:ring-4">
+                <a className="flex items-center gap-4 p-4 sm:gap-5 sm:p-5 md:gap-6 md:p-6 focus:outline-none focus:ring-4">
                   <div className="flex-1 min-w-0">
                     {post.data.category && (
                       <span className="inline-block px-2 py-0.5 mb-2 text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
@@ -75,7 +75,7 @@ export default function Index({ posts, globalData }) {
                     )}
                   </div>
                   {post.data.image && (
-                    <div className="flex-shrink-0 w-24 h-20 sm:w-32 sm:h-24 md:w-40 md:h-28">
+                    <div className="flex-shrink-0 w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-40">
                       <img
                         src={post.data.image}
                         alt={post.data.title}
