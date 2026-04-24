@@ -55,8 +55,8 @@ export default function Index({ posts, globalData }) {
                 as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
                 href={`/posts/[slug]`}
               >
-                <a className="flex items-center gap-4 p-4 sm:gap-5 sm:p-5 md:gap-6 md:p-6 focus:outline-none focus:ring-4">
-                  <div className="flex-1 min-w-0">
+                <a className="flex items-stretch gap-4 p-4 sm:gap-5 sm:p-5 md:gap-6 md:p-6 focus:outline-none focus:ring-4">
+                  <div className="flex-1 min-w-0 flex flex-col">
                     <div className="flex items-center gap-2 mb-1 flex-wrap">
                       {post.data.date && (
                         <p className="uppercase font-bold opacity-60 text-xs sm:text-sm">
@@ -71,13 +71,13 @@ export default function Index({ posts, globalData }) {
                     </div>
                     <h2 className="text-lg sm:text-xl md:text-2xl leading-snug">{post.data.title}</h2>
                     {post.data.description && (
-                      <p className="mt-2 text-sm sm:text-base opacity-60 line-clamp-2">
+                      <p className="mt-2 text-sm sm:text-base opacity-60 flex-1 overflow-hidden">
                         {post.data.description}
                       </p>
                     )}
                   </div>
                   {post.data.image && (
-                    <div className="flex-shrink-0 w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-40">
+                    <div className="flex-shrink-0 w-28 sm:w-36 md:w-48 self-stretch">
                       <img
                         src={post.data.image}
                         alt={post.data.title}

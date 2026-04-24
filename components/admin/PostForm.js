@@ -1,9 +1,33 @@
 import { useState, useRef } from 'react';
 
+const MONTHS = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+const MONTH_MAP = Object.fromEntries(MONTHS.map((m, i) => [m, String(i + 1).padStart(2, '0')]));
+
+function toISO(turkishDate) {
+  if (!turkishDate) return '';
+  const parts = turkishDate.trim().split(' ');
+  if (parts.length !== 3) return '';
+  const day = parts[0].padStart(2, '0');
+  const month = MONTH_MAP[parts[1]];
+  const year = parts[2];
+  if (!month) return '';
+  return `${year}-${month}-${day}`;
+}
+
+function toTurkish(isoDate) {
+  if (!isoDate) return '';
+  const [year, month, day] = isoDate.split('-').map(Number);
+  return `${day} ${MONTHS[month - 1]} ${year}`;
+}
+
+function todayISO() {
+  return new Date().toISOString().slice(0, 10);
+}
+
 export default function PostForm({ initial = {}, onSave, saving }) {
   const [title, setTitle] = useState(initial.title || '');
   const [description, setDescription] = useState(initial.description || '');
-  const [date, setDate] = useState(initial.date || '');
+  const [isoDate, setIsoDate] = useState(toISO(initial.date) || '');
   const [category, setCategory] = useState(initial.category || '');
   const [image, setImage] = useState(initial.image || '');
   const [content, setContent] = useState(initial.content || '');
@@ -39,11 +63,7 @@ export default function PostForm({ initial = {}, onSave, saving }) {
   const handleThumbnail = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    try {
-      setImage(await uploadFile(file));
-    } catch {
-      alert('Görsel yüklenemedi');
-    }
+    try { setImage(await uploadFile(file)); } catch { alert('Görsel yüklenemedi'); }
     e.target.value = '';
   };
 
@@ -58,15 +78,14 @@ export default function PostForm({ initial = {}, onSave, saving }) {
       const md = `\n![${alt}](${url})\n`;
       setContent(content.slice(0, start) + md + content.slice(start));
       setTimeout(() => { el.focus(); el.setSelectionRange(start + md.length, start + md.length); }, 0);
-    } catch {
-      alert('Görsel yüklenemedi');
-    }
+    } catch { alert('Görsel yüklenemedi'); }
     e.target.value = '';
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ title, description, date, category, image, content });
+    const finalDate = toTurkish(isoDate || todayISO());
+    onSave({ title, description, date: finalDate, category, image, content });
   };
 
   const inputCls = 'w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500';
@@ -79,8 +98,19 @@ export default function PostForm({ initial = {}, onSave, saving }) {
           <input type="text" value={title} onChange={e => setTitle(e.target.value)} className={inputCls} required />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Tarih</label>
-          <input type="text" value={date} onChange={e => setDate(e.target.value)} className={inputCls} placeholder="24 Nisan 2026" />
+          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+            Tarih
+            <span className="font-normal opacity-60 ml-1">(boş bırakılırsa bugün)</span>
+          </label>
+          <input
+            type="date"
+            value={isoDate}
+            onChange={e => setIsoDate(e.target.value)}
+            className={inputCls}
+          />
+          {isoDate && (
+            <p className="mt-1 text-xs text-gray-400">{toTurkish(isoDate)}</p>
+          )}
         </div>
       </div>
 
@@ -99,12 +129,7 @@ export default function PostForm({ initial = {}, onSave, saving }) {
         <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Kapak Görseli</label>
         <div className="flex items-start gap-4">
           {image ? (
-            <img
-              src={image}
-              alt="Kapak"
-              className="w-32 h-24 object-cover rounded-xl flex-shrink-0"
-              style={{ filter: 'none', margin: 0 }}
-            />
+            <img src={image} alt="Kapak" className="w-32 h-24 object-cover rounded-xl flex-shrink-0" style={{ filter: 'none', margin: 0 }} />
           ) : (
             <div className="w-32 h-24 bg-gray-100 dark:bg-gray-700 rounded-xl flex items-center justify-center text-gray-400 text-xs flex-shrink-0">
               Görsel yok
@@ -119,13 +144,7 @@ export default function PostForm({ initial = {}, onSave, saving }) {
             >
               {uploading ? 'Yükleniyor...' : 'Görsel Seç'}
             </button>
-            <input
-              type="text"
-              value={image}
-              onChange={e => setImage(e.target.value)}
-              className={inputCls + ' font-mono text-xs'}
-              placeholder="/images/uploads/gorsel.jpg"
-            />
+            <input type="text" value={image} onChange={e => setImage(e.target.value)} className={inputCls + ' font-mono text-xs'} placeholder="/images/uploads/gorsel.jpg" />
             <input ref={thumbnailRef} type="file" accept="image/*" className="hidden" onChange={handleThumbnail} />
           </div>
         </div>
