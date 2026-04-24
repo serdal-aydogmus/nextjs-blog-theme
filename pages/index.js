@@ -38,7 +38,17 @@ export default function Index({ posts, globalData }) {
     return posts.filter(p => p.data.category === selectedCategory);
   }, [posts, selectedCategory]);
 
-  const toggle = (slug) => setOpenSlug(prev => prev === slug ? null : slug);
+  const toggle = (slug) => {
+    const isOpening = openSlug !== slug;
+    setOpenSlug(prev => prev === slug ? null : slug);
+    if (isOpening) {
+      const el = cardRefs.current[slug];
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 16;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <Layout>
