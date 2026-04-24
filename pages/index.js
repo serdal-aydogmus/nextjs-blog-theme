@@ -1,5 +1,8 @@
-import Link from 'next/link';
 import { useState, useMemo } from 'react';
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote } from 'next-mdx-remote';
+import remarkGfm from 'remark-gfm';
+import rehypePrism from '@mapbox/rehype-prism';
 import { getPosts } from '../utils/mdx-utils';
 
 import Footer from '../components/Footer';
@@ -10,58 +13,51 @@ import SEO from '../components/SEO';
 
 export default function Index({ posts, globalData }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [openSlug, setOpenSlug] = useState(null);
 
-  // Get unique categories from posts
   const categories = useMemo(() => {
-    const categorySet = new Set();
-    posts.forEach(post => {
-      if (post.data.category) {
-        categorySet.add(post.data.category);
-      }
-    });
-    return Array.from(categorySet).sort();
+    const set = new Set();
+    posts.forEach(p => { if (p.data.category) set.add(p.data.category); });
+    return Array.from(set).sort();
   }, [posts]);
 
-  // Filter posts based on selected category
   const filteredPosts = useMemo(() => {
     if (!selectedCategory) return posts;
-    return posts.filter(post => post.data.category === selectedCategory);
+    return posts.filter(p => p.data.category === selectedCategory);
   }, [posts, selectedCategory]);
 
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-  };
+  const toggle = (slug) => setOpenSlug(prev => prev === slug ? null : slug);
 
   return (
     <Layout>
       <SEO title={globalData.name} description={globalData.blogTitle} />
-      <Header 
-        name={globalData.name} 
+      <Header
+        name={globalData.name}
         categories={categories}
         selectedCategory={selectedCategory}
-        onCategoryChange={handleCategoryChange}
+        onCategoryChange={setSelectedCategory}
       />
       <main className="w-full">
-        <h1 className="text-3xl lg:text-5xl text-center mb-12">
-          {globalData.blogTitle}
-        </h1>
+        <h1 className="text-3xl lg:text-5xl text-center mb-12">{globalData.blogTitle}</h1>
         <ul className="w-full">
-          {filteredPosts.map((post) => (
-            <li
-              key={post.filePath}
-              className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-md bg-white dark:bg-black dark:bg-opacity-60 bg-opacity-75 hover:bg-opacity-90 dark:hover:bg-opacity-75 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0"
-            >
-              <Link
-                as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
-                href={`/posts/[slug]`}
+          {filteredPosts.map((post) => {
+            const slug = post.filePath.replace(/\.mdx?$/, '');
+            const isOpen = openSlug === slug;
+
+            return (
+              <li
+                key={post.filePath}
+                className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-md bg-white dark:bg-black dark:bg-opacity-60 bg-opacity-75 border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hovered-sibling:border-t-0"
               >
-                <a className="flex items-stretch gap-4 p-4 sm:gap-5 sm:p-5 md:gap-6 md:p-6 focus:outline-none focus:ring-4">
+                {/* Summary — click to toggle */}
+                <div
+                  onClick={() => toggle(slug)}
+                  className="flex items-stretch gap-4 p-4 sm:gap-5 sm:p-5 md:gap-6 md:p-6 cursor-pointer select-none"
+                >
                   <div className="flex-1 min-w-0 flex flex-col">
                     <div className="flex items-center gap-2 mb-1 flex-wrap">
                       {post.data.date && (
-                        <p className="uppercase font-bold opacity-60 text-xs sm:text-sm">
-                          {post.data.date}
-                        </p>
+                        <p className="uppercase font-bold opacity-60 text-xs sm:text-sm">{post.data.date}</p>
                       )}
                       {post.data.category && (
                         <span className="inline-block px-2 py-0.5 text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
@@ -85,13 +81,34 @@ export default function Index({ posts, globalData }) {
                       />
                     </div>
                   )}
-                </a>
-              </Link>
-            </li>
-          ))}
+                </div>
+
+                {/* Expandable content */}
+                <div className="accordion-content" style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}>
+                  <div className="overflow-hidden">
+                    <div className="px-5 sm:px-6 md:px-10 pt-6 pb-4 border-t border-gray-200 dark:border-gray-700">
+                      <article className="prose dark:prose-dark max-w-none prose-sm sm:prose-base">
+                        {post.mdxSource && <MDXRemote {...post.mdxSource} />}
+                      </article>
+                    </div>
+                    <div className="flex justify-center py-5">
+                      <button
+                        onClick={() => setOpenSlug(null)}
+                        aria-label="Kapat"
+                        className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition text-gray-500 dark:text-gray-300"
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                          <polyline points="18 15 12 9 6 15" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
         </ul>
-        
-        {/* Show message when no posts match filter */}
+
         {filteredPosts.length === 0 && selectedCategory && (
           <div className="text-center py-12">
             <p className="text-lg opacity-60">
@@ -101,21 +118,27 @@ export default function Index({ posts, globalData }) {
         )}
       </main>
       <Footer copyrightText={globalData.footerText} />
-      <GradientBackground
-        variant="large"
-        className="fixed top-20 opacity-40 dark:opacity-60"
-      />
-      <GradientBackground
-        variant="small"
-        className="absolute bottom-0 opacity-20 dark:opacity-10"
-      />
+      <GradientBackground variant="large" className="fixed top-20 opacity-40 dark:opacity-60" />
+      <GradientBackground variant="small" className="absolute bottom-0 opacity-20 dark:opacity-10" />
     </Layout>
   );
 }
 
-export function getStaticProps() {
+export async function getStaticProps() {
   const posts = getPosts();
   const globalData = getGlobalData();
 
-  return { props: { posts, globalData } };
+  const postsWithContent = await Promise.all(
+    posts.map(async (post) => {
+      const mdxSource = await serialize(post.content || '', {
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [rehypePrism],
+        },
+      });
+      return { ...post, mdxSource };
+    })
+  );
+
+  return { props: { posts: postsWithContent, globalData } };
 }
