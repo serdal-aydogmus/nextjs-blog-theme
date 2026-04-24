@@ -43,19 +43,21 @@ export default function PostPage({
       />
       <Header name={globalData.name} />
       <article className="w-full">
-        <header className="px-4 sm:px-6 md:px-0">
-          <h1 className="text-2xl sm:text-3xl md:text-5xl dark:text-white text-center mb-8 md:mb-12 leading-tight">
-            {frontMatter.title}
-          </h1>
-          {frontMatter.description && (
-            <p className="text-lg sm:text-xl mb-4 px-2">{frontMatter.description}</p>
-          )}
-        </header>
-        <main className="px-4 sm:px-6 md:px-0">
-          <article className="prose dark:prose-dark max-w-none prose-sm sm:prose-base md:prose-lg">
-            <MDXRemote {...source} components={components} />
-          </article>
-        </main>
+        <div className="backdrop-blur-md bg-white/80 dark:bg-gray-900/80 rounded-2xl shadow-xl px-6 py-8 md:px-12 md:py-10 mb-8">
+          <header className="mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl dark:text-white text-center mb-8 md:mb-12 leading-tight">
+              {frontMatter.title}
+            </h1>
+            {frontMatter.description && (
+              <p className="text-lg sm:text-xl mb-4">{frontMatter.description}</p>
+            )}
+          </header>
+          <main>
+            <article className="prose dark:prose-dark max-w-none prose-sm sm:prose-base md:prose-lg">
+              <MDXRemote {...source} components={components} />
+            </article>
+          </main>
+        </div>
         <div className="grid md:grid-cols-2 lg:-mx-24 mt-12 px-4 sm:px-6 md:px-0">
           {prevPost && (
             <Link href={`/posts/${prevPost.slug}`}>
