@@ -57,16 +57,18 @@ export default function Index({ posts, globalData }) {
               >
                 <a className="flex items-center gap-4 p-4 sm:gap-5 sm:p-5 md:gap-6 md:p-6 focus:outline-none focus:ring-4">
                   <div className="flex-1 min-w-0">
-                    {post.data.category && (
-                      <span className="inline-block px-2 py-0.5 mb-2 text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
-                        {post.data.category}
-                      </span>
-                    )}
-                    {post.data.date && (
-                      <p className="uppercase mb-1 font-bold opacity-60 text-xs sm:text-sm">
-                        {post.data.date}
-                      </p>
-                    )}
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      {post.data.date && (
+                        <p className="uppercase font-bold opacity-60 text-xs sm:text-sm">
+                          {post.data.date}
+                        </p>
+                      )}
+                      {post.data.category && (
+                        <span className="inline-block px-2 py-0.5 text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
+                          {post.data.category}
+                        </span>
+                      )}
+                    </div>
                     <h2 className="text-lg sm:text-xl md:text-2xl leading-snug">{post.data.title}</h2>
                     {post.data.description && (
                       <p className="mt-2 text-sm sm:text-base opacity-60 line-clamp-2">
