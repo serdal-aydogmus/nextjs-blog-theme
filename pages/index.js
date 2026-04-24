@@ -77,7 +77,7 @@ export default function Index({ posts, globalData }) {
                     )}
                   </div>
                   {post.data.image && (
-                    <div className="flex-shrink-0 w-28 sm:w-36 md:w-48 self-stretch">
+                    <div className="flex-shrink-0 w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 self-center">
                       <img
                         src={post.data.image}
                         alt={post.data.title}
