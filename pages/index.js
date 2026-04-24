@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import remarkGfm from 'remark-gfm';
@@ -14,6 +14,18 @@ import SEO from '../components/SEO';
 export default function Index({ posts, globalData }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [openSlug, setOpenSlug] = useState(null);
+  const cardRefs = useRef({});
+
+  const closeCard = (slug) => {
+    const el = cardRefs.current[slug];
+    const absoluteTop = el ? el.getBoundingClientRect().top + window.scrollY : null;
+    setOpenSlug(null);
+    if (absoluteTop !== null) {
+      setTimeout(() => {
+        window.scrollTo({ top: absoluteTop - 24, behavior: 'smooth' });
+      }, 30);
+    }
+  };
 
   const categories = useMemo(() => {
     const set = new Set();
@@ -47,7 +59,10 @@ export default function Index({ posts, globalData }) {
             return (
               <li
                 key={post.filePath}
-                className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-md bg-white dark:bg-black dark:bg-opacity-60 bg-opacity-75 border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hovered-sibling:border-t-0"
+                ref={el => { cardRefs.current[slug] = el; }}
+                className={`md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-md bg-white dark:bg-black dark:bg-opacity-60 bg-opacity-75 border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hovered-sibling:border-t-0 transition-all duration-500 ${
+                  openSlug && !isOpen ? 'opacity-30 blur-sm pointer-events-none' : ''
+                }`}
               >
                 {/* Summary — click to toggle */}
                 <div
@@ -102,7 +117,7 @@ export default function Index({ posts, globalData }) {
                     </div>
                     <div className="flex justify-center py-5">
                       <button
-                        onClick={() => setOpenSlug(null)}
+                        onClick={() => closeCard(slug)}
                         aria-label="Kapat"
                         className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition text-gray-500 dark:text-gray-300"
                       >

@@ -24,7 +24,7 @@ body {
 /* Accordion expand/collapse animation */
 .accordion-content {
   display: grid;
-  transition: grid-template-rows 0.4s ease;
+  transition: grid-template-rows 0.65s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Palette filter: shift images toward the site's purple/blue tones */
