@@ -83,6 +83,15 @@ export default function Index({ posts, globalData }) {
                   )}
                 </div>
 
+                {/* Expand indicator — only shown when collapsed */}
+                {!isOpen && (
+                  <div className="flex justify-center pb-3 -mt-1 opacity-40 hover:opacity-70 transition-opacity pointer-events-none">
+                    <svg viewBox="0 0 40 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-5 text-gray-500 dark:text-gray-400">
+                      <polyline points="4 4 20 16 36 4" />
+                    </svg>
+                  </div>
+                )}
+
                 {/* Expandable content */}
                 <div className="accordion-content" style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}>
                   <div className="overflow-hidden">
