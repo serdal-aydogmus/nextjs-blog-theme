@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fce4ec"/>
+      <stop offset="100%" stop-color="#f8bbd0"/>
+    </linearGradient>
+    <radialGradient id="petalG" cx="50%" cy="80%" r="70%">
+      <stop offset="0%" stop-color="#f48fb1"/>
+      <stop offset="100%" stop-color="#e91e63"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg2)"/>
+  <rect y="310" width="600" height="90" fill="#81c784" opacity="0.5"/>
+  <g transform="translate(300,195)">
+    <ellipse cx="0" cy="-68" rx="26" ry="52" fill="url(#petalG)" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-68" rx="26" ry="52" fill="#ec407a" opacity="0.85" transform="rotate(72)"/>
+    <ellipse cx="0" cy="-68" rx="26" ry="52" fill="url(#petalG)" opacity="0.9" transform="rotate(144)"/>
+    <ellipse cx="0" cy="-68" rx="26" ry="52" fill="#ec407a" opacity="0.85" transform="rotate(216)"/>
+    <ellipse cx="0" cy="-68" rx="26" ry="52" fill="url(#petalG)" transform="rotate(288)"/>
+    <circle r="28" fill="#ad1457"/>
+    <circle r="14" fill="#880e4f"/>
+    <circle r="5" cx="0" cy="0" fill="#ffd54f"/>
+  </g>
+  <path d="M300,230 Q308,305 312,395" stroke="#388e3c" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <ellipse cx="328" cy="310" rx="35" ry="14" fill="#43a047" transform="rotate(30,328,310)"/>
+  <ellipse cx="282" cy="345" rx="32" ry="13" fill="#43a047" transform="rotate(-25,282,345)"/>
+</svg>

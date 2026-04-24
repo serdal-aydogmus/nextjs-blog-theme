@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e8eaf6"/>
+      <stop offset="100%" stop-color="#c5cae9"/>
+    </linearGradient>
+    <radialGradient id="petalV" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ce93d8"/>
+      <stop offset="100%" stop-color="#7b1fa2"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg4)"/>
+  <rect y="305" width="600" height="95" fill="#66bb6a" opacity="0.45"/>
+  <!-- Lavender style: multiple small flower clusters on stems -->
+  <!-- Main stem -->
+  <path d="M300,380 Q302,260 300,160" stroke="#388e3c" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- Small florets along the stem -->
+  <g opacity="0.95">
+    <ellipse cx="295" cy="165" rx="10" ry="16" fill="url(#petalV)" transform="rotate(-15,295,165)"/>
+    <ellipse cx="305" cy="168" rx="10" ry="16" fill="#9c27b0" transform="rotate(15,305,168)"/>
+    <ellipse cx="288" cy="185" rx="10" ry="15" fill="url(#petalV)" transform="rotate(-20,288,185)"/>
+    <ellipse cx="312" cy="188" rx="10" ry="15" fill="#9c27b0" transform="rotate(20,312,188)"/>
+    <ellipse cx="284" cy="205" rx="10" ry="14" fill="url(#petalV)" transform="rotate(-18,284,205)"/>
+    <ellipse cx="316" cy="208" rx="10" ry="14" fill="#9c27b0" transform="rotate(18,316,208)"/>
+    <ellipse cx="281" cy="224" rx="9" ry="13" fill="url(#petalV)" transform="rotate(-15,281,224)"/>
+    <ellipse cx="319" cy="227" rx="9" ry="13" fill="#ab47bc" transform="rotate(15,319,227)"/>
+    <ellipse cx="280" cy="243" rx="9" ry="12" fill="url(#petalV)" transform="rotate(-12,280,243)"/>
+    <ellipse cx="320" cy="246" rx="9" ry="12" fill="#ab47bc" transform="rotate(12,320,246)"/>
+    <ellipse cx="282" cy="262" rx="8" ry="11" fill="url(#petalV)" transform="rotate(-10,282,262)"/>
+    <ellipse cx="318" cy="265" rx="8" ry="11" fill="#ba68c8" transform="rotate(10,318,265)"/>
+  </g>
+  <!-- Leaves -->
+  <ellipse cx="270" cy="290" rx="35" ry="13" fill="#43a047" transform="rotate(-25,270,290)"/>
+  <ellipse cx="332" cy="310" rx="32" ry="12" fill="#43a047" transform="rotate(20,332,310)"/>
+</svg>

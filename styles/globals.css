@@ -21,6 +21,17 @@ body {
   background-repeat: no-repeat;
 }
 
+/* Palette filter: shift images toward the site's purple/blue tones */
+.post-thumbnail,
+.prose img {
+  filter: sepia(0.35) hue-rotate(210deg) saturate(1.4) brightness(0.88);
+  transition: filter 0.3s ease;
+}
+
+.post-thumbnail:hover {
+  filter: sepia(0.15) hue-rotate(210deg) saturate(1.2) brightness(0.95);
+}
+
 /* Responsive image styles */
 img, svg {
   max-width: 100%;

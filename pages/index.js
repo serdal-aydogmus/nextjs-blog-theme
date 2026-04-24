@@ -5,7 +5,6 @@ import { getPosts } from '../utils/mdx-utils';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Layout, { GradientBackground } from '../components/Layout';
-import ArrowIcon from '../components/ArrowIcon';
 import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
 
@@ -50,34 +49,40 @@ export default function Index({ posts, globalData }) {
           {filteredPosts.map((post) => (
             <li
               key={post.filePath}
-              className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-md bg-white dark:bg-black dark:bg-opacity-60 bg-opacity-75 hover:bg-opacity-90 dark:hover:bg-opacity-75 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0 relative"
+              className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-md bg-white dark:bg-black dark:bg-opacity-60 bg-opacity-75 hover:bg-opacity-90 dark:hover:bg-opacity-75 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0"
             >
-              {/* Category tag in top-right corner */}
-              {post.data.category && (
-                <div className="absolute top-4 right-4 md:top-6 md:right-6">
-                  <span className="inline-block px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
-                    {post.data.category}
-                  </span>
-                </div>
-              )}
-              
               <Link
                 as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
                 href={`/posts/[slug]`}
               >
-                <a className="py-6 lg:py-10 px-4 sm:px-6 lg:px-16 pr-16 sm:pr-20 md:pr-24 block focus:outline-none focus:ring-4">
-                  {post.data.date && (
-                    <p className="uppercase mb-3 font-bold opacity-60 text-sm sm:text-base">
-                      {post.data.date}
-                    </p>
+                <a className="flex items-center gap-4 py-5 px-4 sm:px-6 lg:px-10 focus:outline-none focus:ring-4">
+                  <div className="flex-1 min-w-0">
+                    {post.data.category && (
+                      <span className="inline-block px-2 py-0.5 mb-2 text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
+                        {post.data.category}
+                      </span>
+                    )}
+                    {post.data.date && (
+                      <p className="uppercase mb-1 font-bold opacity-60 text-xs sm:text-sm">
+                        {post.data.date}
+                      </p>
+                    )}
+                    <h2 className="text-lg sm:text-xl md:text-2xl leading-snug">{post.data.title}</h2>
+                    {post.data.description && (
+                      <p className="mt-2 text-sm sm:text-base opacity-60 line-clamp-2">
+                        {post.data.description}
+                      </p>
+                    )}
+                  </div>
+                  {post.data.image && (
+                    <div className="flex-shrink-0 w-24 h-20 sm:w-32 sm:h-24 md:w-40 md:h-28">
+                      <img
+                        src={post.data.image}
+                        alt={post.data.title}
+                        className="w-full h-full object-cover rounded-xl post-thumbnail"
+                      />
+                    </div>
                   )}
-                  <h2 className="text-xl sm:text-2xl md:text-3xl pr-2 sm:pr-4 leading-tight">{post.data.title}</h2>
-                  {post.data.description && (
-                    <p className="mt-3 text-base sm:text-lg opacity-60 pr-2 sm:pr-4">
-                      {post.data.description}
-                    </p>
-                  )}
-                  <ArrowIcon className="mt-4" />
                 </a>
               </Link>
             </li>
