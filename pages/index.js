@@ -71,7 +71,7 @@ export default function Index({ posts, globalData }) {
                 key={post.filePath}
                 ref={el => { cardRefs.current[slug] = el; }}
                 className={`md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-md bg-white dark:bg-black dark:bg-opacity-60 bg-opacity-75 border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hovered-sibling:border-t-0 transition-all duration-500 ${
-                  openSlug && !isOpen ? 'opacity-30 blur-sm pointer-events-none' : ''
+                  openSlug && !isOpen ? 'opacity-55 blur-[1px] pointer-events-none' : ''
                 }`}
               >
                 {/* Summary — click to toggle */}
