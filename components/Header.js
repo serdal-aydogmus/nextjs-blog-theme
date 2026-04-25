@@ -13,11 +13,16 @@ export default function Header({ name, categories = [], selectedCategory, onCate
   return (
     <header className="pt-20 pb-12">
       <div className="w-12 h-12 rounded-full block mx-auto mb-4 bg-gradient-conic from-gradient-3 to-gradient-4" style={{ display: 'none' }} />
-      <p className="text-2xl dark:text-white text-center mb-8">
+      <div className="text-center mb-8">
         <Link href="/">
-          <a>{name}</a>
+          <a
+            className="dark:text-white hover:opacity-80 transition-opacity"
+            style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 700, letterSpacing: '0.08em', lineHeight: 1.1 }}
+          >
+            {name}
+          </a>
         </Link>
-      </p>
+      </div>
       
       {/* Category Navigation */}
       {categories.length > 0 && (
