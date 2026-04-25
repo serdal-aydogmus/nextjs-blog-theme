@@ -17,7 +17,7 @@ export default function Header({ name, categories = [], selectedCategory, onCate
         <Link href="/">
           <a
             className="dark:text-white hover:opacity-80 transition-opacity"
-            style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 700, letterSpacing: '0.08em', lineHeight: 1.1 }}
+            style={{ fontFamily: "'Libre Baskerville', Georgia, serif", fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 700, fontStyle: 'italic', letterSpacing: '0.08em', lineHeight: 1.1 }}
           >
             {name}
           </a>
