@@ -10,6 +10,7 @@ import Header from '../components/Header';
 import Layout, { GradientBackground } from '../components/Layout';
 import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
+import ShareButtons from '../components/ShareButtons';
 
 export default function Index({ posts, globalData }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -123,6 +124,7 @@ export default function Index({ posts, globalData }) {
                       <article className="prose dark:prose-dark max-w-none prose-sm sm:prose-base">
                         {post.mdxSource && <MDXRemote {...post.mdxSource} />}
                       </article>
+                      <ShareButtons title={post.data.title} slug={slug} />
                     </div>
                     <div className="flex justify-center py-5">
                       <button
