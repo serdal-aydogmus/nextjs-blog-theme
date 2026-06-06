@@ -12,6 +12,17 @@ import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
 import ShareButtons from '../components/ShareButtons';
 
+const TR_MONTHS = {
+  'ocak': 0, 'şubat': 1, 'mart': 2, 'nisan': 3, 'mayıs': 4, 'haziran': 5,
+  'temmuz': 6, 'ağustos': 7, 'eylül': 8, 'ekim': 9, 'kasım': 10, 'aralık': 11,
+};
+
+function parseTurkishDate(str) {
+  if (!str) return new Date(0);
+  const [day, month, year] = str.toLowerCase().split(' ');
+  return new Date(parseInt(year) || 0, TR_MONTHS[month] ?? 0, parseInt(day) || 1);
+}
+
 function getExcerpt(content = '') {
   return content
     .replace(/```[\s\S]*?```/g, '')
@@ -222,6 +233,8 @@ export async function getServerSideProps({ query }) {
       };
     })
   );
+
+  posts.sort((a, b) => parseTurkishDate(b.data.date) - parseTurkishDate(a.data.date));
 
   const ogRow = initialSlug ? (rows || []).find(r => r.slug === initialSlug) : null;
   const ogPost = ogRow
