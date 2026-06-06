@@ -4,7 +4,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://serdalaydogmus.com
 
 export default function ShareButtons({ title, slug }) {
   const [copied, setCopied] = useState(false);
-  const url = `${SITE_URL}/posts/${slug}`;
+  const url = `${SITE_URL}/?post=${slug}`;
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
 

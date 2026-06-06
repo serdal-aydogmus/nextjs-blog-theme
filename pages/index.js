@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import remarkGfm from 'remark-gfm';
@@ -23,15 +23,27 @@ function getExcerpt(content = '') {
     .trim();
 }
 
-export default function Index({ posts, globalData }) {
+export default function Index({ posts, globalData, initialSlug, ogPost }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [openSlug, setOpenSlug] = useState(null);
+  const [openSlug, setOpenSlug] = useState(initialSlug || null);
   const cardRefs = useRef({});
+
+  useEffect(() => {
+    if (!initialSlug) return;
+    const el = cardRefs.current[initialSlug];
+    if (el) {
+      setTimeout(() => {
+        const top = el.getBoundingClientRect().top + window.scrollY - 16;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }, 100);
+    }
+  }, [initialSlug]);
 
   const closeCard = (slug) => {
     const el = cardRefs.current[slug];
     const absoluteTop = el ? el.getBoundingClientRect().top + window.scrollY : null;
     setOpenSlug(null);
+    window.history.replaceState(null, '', '/');
     if (absoluteTop !== null) {
       setTimeout(() => {
         window.scrollTo({ top: absoluteTop - 24, behavior: 'smooth' });
@@ -54,17 +66,26 @@ export default function Index({ posts, globalData }) {
     const isOpening = openSlug !== slug;
     setOpenSlug(prev => prev === slug ? null : slug);
     if (isOpening) {
+      window.history.replaceState(null, '', `/?post=${slug}`);
       const el = cardRefs.current[slug];
       if (el) {
         const top = el.getBoundingClientRect().top + window.scrollY - 16;
         window.scrollTo({ top, behavior: 'smooth' });
       }
+    } else {
+      window.history.replaceState(null, '', '/');
     }
   };
 
   return (
     <Layout>
-      <SEO title={globalData.name} description={globalData.blogTitle} />
+      <SEO
+        title={ogPost ? `${ogPost.title} - ${globalData.name}` : globalData.name}
+        description={ogPost ? ogPost.description : globalData.blogTitle}
+        image={ogPost?.image}
+        url={initialSlug ? `/?post=${initialSlug}` : '/'}
+        type={ogPost ? 'article' : 'website'}
+      />
       <Header
         name={globalData.name}
         categories={categories}
@@ -170,8 +191,9 @@ export default function Index({ posts, globalData }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query }) {
   const globalData = getGlobalData();
+  const initialSlug = query.post || null;
 
   const { data: rows } = await supabase
     .from('posts')
@@ -201,5 +223,10 @@ export async function getServerSideProps() {
     })
   );
 
-  return { props: { posts, globalData } };
+  const ogRow = initialSlug ? (rows || []).find(r => r.slug === initialSlug) : null;
+  const ogPost = ogRow
+    ? { title: ogRow.title, description: ogRow.description, image: ogRow.image }
+    : null;
+
+  return { props: { posts, globalData, initialSlug, ogPost } };
 }
