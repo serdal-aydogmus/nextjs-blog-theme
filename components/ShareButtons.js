@@ -1,12 +1,22 @@
+import { useState } from 'react';
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://serdalaydogmus.com';
 
 export default function ShareButtons({ title, slug }) {
+  const [copied, setCopied] = useState(false);
   const url = `${SITE_URL}/posts/${slug}`;
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
 
   const xHref = `https://x.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
   const whatsappHref = `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`;
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
 
   return (
     <div className="flex items-center gap-3 mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
@@ -35,6 +45,27 @@ export default function ShareButtons({ title, slug }) {
         </svg>
         WhatsApp
       </a>
+      <button
+        onClick={copyLink}
+        className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+      >
+        {copied ? (
+          <>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Kopyalandı
+          </>
+        ) : (
+          <>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+            </svg>
+            Linki Kopyala
+          </>
+        )}
+      </button>
     </div>
   );
 }
