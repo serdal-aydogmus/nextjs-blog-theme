@@ -3,7 +3,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import remarkGfm from 'remark-gfm';
 import rehypePrism from '@mapbox/rehype-prism';
-import { getPosts } from '../utils/mdx-utils';
+import { supabase } from '../lib/supabase';
 
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -170,21 +170,36 @@ export default function Index({ posts, globalData }) {
   );
 }
 
-export async function getStaticProps() {
-  const posts = getPosts();
+export async function getServerSideProps() {
   const globalData = getGlobalData();
 
-  const postsWithContent = await Promise.all(
-    posts.map(async (post) => {
-      const mdxSource = await serialize(post.content || '', {
+  const { data: rows } = await supabase
+    .from('posts')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  const posts = await Promise.all(
+    (rows || []).map(async (row) => {
+      const mdxSource = await serialize(row.content || '', {
         mdxOptions: {
           remarkPlugins: [remarkGfm],
           rehypePlugins: [rehypePrism],
         },
       });
-      return { ...post, mdxSource };
+      return {
+        content: row.content || '',
+        filePath: `${row.slug}.mdx`,
+        data: {
+          title: row.title,
+          description: row.description,
+          date: row.date,
+          category: row.category,
+          image: row.image,
+        },
+        mdxSource,
+      };
     })
   );
 
-  return { props: { posts: postsWithContent, globalData } };
+  return { props: { posts, globalData } };
 }
