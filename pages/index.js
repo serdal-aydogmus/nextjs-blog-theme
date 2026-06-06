@@ -12,6 +12,17 @@ import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
 import ShareButtons from '../components/ShareButtons';
 
+function getExcerpt(content = '') {
+  return content
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/!\[.*?\]\(.*?\)/g, '')
+    .replace(/\[([^\]]+)\]\(.*?\)/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/[*_~`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export default function Index({ posts, globalData }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [openSlug, setOpenSlug] = useState(null);
@@ -91,9 +102,9 @@ export default function Index({ posts, globalData }) {
                       )}
                     </div>
                     <h2 className="text-lg sm:text-xl md:text-2xl leading-snug">{post.data.title}</h2>
-                    {post.data.description && (
-                      <p className="mt-2 text-sm sm:text-base opacity-60 flex-1 overflow-hidden">
-                        {post.data.description}
+                    {post.content && (
+                      <p className="mt-2 text-sm sm:text-base opacity-60 line-clamp-3">
+                        {getExcerpt(post.content)}
                       </p>
                     )}
                   </div>
