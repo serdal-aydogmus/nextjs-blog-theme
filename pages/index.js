@@ -75,14 +75,19 @@ export default function Index({ posts, globalData, initialSlug, ogPost }) {
 
   const toggle = (slug) => {
     const isOpening = openSlug !== slug;
+    const isSwitching = isOpening && openSlug !== null;
+
     setOpenSlug(prev => prev === slug ? null : slug);
+
     if (isOpening) {
       window.history.replaceState(null, '', `/?post=${slug}`);
       const el = cardRefs.current[slug];
-      if (el) {
+      if (!el) return;
+      const delay = isSwitching ? 680 : 0;
+      setTimeout(() => {
         const top = el.getBoundingClientRect().top + window.scrollY - 16;
         window.scrollTo({ top, behavior: 'smooth' });
-      }
+      }, delay);
     } else {
       window.history.replaceState(null, '', '/');
     }
