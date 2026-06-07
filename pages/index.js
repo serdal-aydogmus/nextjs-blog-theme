@@ -106,7 +106,7 @@ export default function Index({ posts, globalData, initialSlug, ogPost }) {
         name={globalData.name}
         categories={categories}
         selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
+        onCategoryChange={(cat) => { setOpenSlug(null); window.history.replaceState(null, '', '/'); setSelectedCategory(cat); }}
       />
       <main className="w-full">
         <ul className="w-full">
