@@ -6,8 +6,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en" className="theme-compiled">
         <Head>
-          <meta name="robots" content="noindex,nofollow" />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@1,400;1,700&display=swap" rel="stylesheet" />
         </Head>
